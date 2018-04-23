@@ -21,16 +21,10 @@
     }
   </style>
   
-   <!-- Optional JavaScript -->
-   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-   <script src="imc.js"></script>
-   
+
     <fieldset>
    
- <form  action="Calculador" method="POST">
+   <form method = "GET" action = "index.jsp">
  
     <h1>Cálculo de IMC</h1>
     
@@ -61,6 +55,21 @@
              <input type="text" size="10" name= "kilos">
      </div>
      </div>
+     
+      <%
+    float kilos =  request.getParameter("kilos") != null ?  new Float(request.getParameter("kilos")) : 0f;
+    float metros = request.getParameter("metros") != null ?  new Float(request.getParameter("metros")) : 0f;
+    float centimetros = request.getParameter("centimetros") != null ?  new Float(request.getParameter("centimetros")) : 0f;
+    float imc = request.getParameter("imc") != null ?  new Float(request.getParameter("imc")) : 0f;
+    float altura= request.getParameter("altura") != null ?  new Float(request.getParameter("altura")) : 0f;
+   
+    altura = (metros*100 + centimetros)/100  ; 
+
+    imc = kilos / (altura * altura) ;
+     
+   
+       
+    %>
 
   <!--Botão Calcular-->
    <div class="form-group row mx-sm-3 mb-1">
@@ -70,19 +79,28 @@
              <div class="form-group row mx-sm-0 mb-3">
                    <label for="imc" class="col-sm-0 col-form-label">IMC:</label>
              <div class="col-sm-7">
-                   <input type="text" class="form-control" name="imc" disabled="disabled"/>
+                   <input type="text" class="form-control" name="imc"  value="<%=imc%>" disabled="disabled"/>
            </div>
        </div>
        
    </div>
     
-   </form>
 
-         
+
+	
+	
+	
+	
+  
+
+
+</div>
+    
+   </form>
+   
+      
    </fieldset>
    
-
-
 
  <div>
      <h2>Avalie seus resultados</h2>
